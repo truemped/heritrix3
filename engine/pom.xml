@@ -105,15 +105,10 @@
         </dependency>
         -->
         <dependency>  
-          <groupId>org.restlet</groupId>  
-          <artifactId>org.restlet</artifactId>  
-          <version>1.1.6</version>  
-        </dependency>  
-        <dependency>  
           <groupId>com.noelios.restlet</groupId>  
           <artifactId>com.noelios.restlet</artifactId>  
           <version>1.1.6</version>  
-        </dependency>  
+        </dependency>
         <dependency>  
           <groupId>com.noelios.restlet</groupId>  
           <artifactId>com.noelios.restlet.ext.jetty</artifactId>  
@@ -123,6 +118,16 @@
           <groupId>joda-time</groupId>  
           <artifactId>joda-time</artifactId>  
           <version>1.6</version>  
+        </dependency>
+        <dependency>
+        	<groupId>org.restlet.jse</groupId>
+        	<artifactId>org.restlet.ext.jetty</artifactId>
+        	<version>2.0-M6</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.restlet.jse</groupId>
+        	<artifactId>org.restlet.ext.jackson</artifactId>
+        	<version>2.0-SNAPSHOT</version>
         </dependency>
   </dependencies>
 
