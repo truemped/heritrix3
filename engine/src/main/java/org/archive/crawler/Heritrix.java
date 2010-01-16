@@ -48,14 +48,14 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.archive.crawler.framework.Engine;
-import org.archive.crawler.restlet.EngineApplication;
-import org.archive.crawler.restlet.RateLimitGuard;
+import org.archive.crawler.restlet2.EngineApplication;
+import org.archive.crawler.restlet2.RateLimitDigestAuthenticator;
 import org.archive.util.ArchiveUtils;
 import org.restlet.Component;
-import org.restlet.Guard;
 import org.restlet.Server;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.data.Protocol;
+import org.restlet.ext.crypto.DigestAuthenticator;
+import org.restlet.security.MapVerifier;
 
 import sun.security.tools.KeyTool;
 
@@ -328,11 +328,15 @@ public class Heritrix {
             }
             component.getClients().add(Protocol.FILE);
             component.getClients().add(Protocol.CLAP); 
-            Guard guard = new RateLimitGuard(null,
-                    ChallengeScheme.HTTP_DIGEST, "Authentication Required");
-            guard.getSecrets().put(authLogin, authPassword.toCharArray());
-            component.getDefaultHost().attach(guard);
-            guard.setNext(new EngineApplication(engine));
+            
+            DigestAuthenticator authenticator = new RateLimitDigestAuthenticator(null, "Authentication Required", "fjkur;ufdbhvparp974glsdg");
+            MapVerifier verifier = new MapVerifier();
+            verifier.getLocalSecrets().put(authLogin, authPassword.toCharArray());
+            authenticator.setWrappedVerifier(verifier);
+            authenticator.setNext(new EngineApplication(engine));
+            component.getDefaultHost().attach(authenticator);
+            component.getDefaultHost().attach(new EngineApplication(engine));
+            
             component.start();
             startupOut.println("engine listening at port "+port);
             startupOut.println("operator login is '"+authLogin
