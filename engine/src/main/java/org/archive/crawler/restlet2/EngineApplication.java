@@ -18,6 +18,7 @@ package org.archive.crawler.restlet2;
 
 import org.archive.crawler.framework.Engine;
 import org.archive.crawler.restlet2.impl.EngineResourceImpl;
+import org.archive.crawler.restlet2.impl.JobResourceImpl;
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Redirector;
@@ -63,6 +64,7 @@ public class EngineApplication extends Application {
 				Redirector.MODE_CLIENT_PERMANENT));
 
 		router.attach("/engine/", EngineResourceImpl.class);
+		router.attach("/engine/job/{job}", JobResourceImpl.class);
 
 		return router;
 	}

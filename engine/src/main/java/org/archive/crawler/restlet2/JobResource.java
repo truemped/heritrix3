@@ -28,9 +28,9 @@ import org.restlet.resource.Post;
 public interface JobResource {
 
 	@Get("json")
-	Object getStatus();
+	JobInfo getJobStatus();
 	
 	@Post("json")
-	void manipulate(Object o);
+	OperationStatusResponse manipulateJob();
 	
 }

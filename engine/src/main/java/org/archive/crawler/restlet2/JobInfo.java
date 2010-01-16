@@ -17,6 +17,8 @@
 package org.archive.crawler.restlet2;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Daniel Truemper <truemped@googlemail.com>
@@ -73,6 +75,71 @@ public class JobInfo implements Serializable {
 	 * If the job is finished this field contains the exit status.
 	 */
 	private String crawlExitStatus;
+
+	/**
+	 * 
+	 */
+	private List<String> jobLogTail;
+
+	/**
+	 * 
+	 */
+	private String statusDescription;
+	
+	/**
+	 * 
+	 */
+	private List<String> availableActions;
+	
+	/**
+	 * URI report.
+	 */
+	private Map<String, Long> uriTotalsReport;
+
+	/**
+	 * Size report.
+	 */
+	private Map<String, Long> sizeTotalsReport;
+
+	/**
+	 * Rate report.
+	 */
+	private Map<String, Number> rateReport;
+
+	/**
+	 * Load report.
+	 */
+	private Map<String, Number> loadReport;
+
+	/**
+	 * Elapsed report.
+	 */
+	private Map<String, Object> elapsedReport;
+
+	/**
+	 * TOE thread report.
+	 */
+	private Map<String, Object> threadReport;
+
+	/**
+	 * Frontier report.
+	 */
+	private Map<String, Object> frontierReport;
+
+	/**
+	 * Heap report.
+	 */
+	private Map<String, Object> heapReport;
+
+	/**
+	 * 
+	 */
+	private List<String> crawlLogTail;
+
+	/**
+	 * All config files.
+	 */
+	private List<Map<String, String>> configFiles;
 
 	/**
 	 * @return the shortName
@@ -207,6 +274,199 @@ public class JobInfo implements Serializable {
 	 */
 	public void setCrawlExitStatus(String crawlExitStatus) {
 		this.crawlExitStatus = crawlExitStatus;
+	}
+
+	/**
+	 * @return the jobLogTail
+	 */
+	public List<String> getJobLogTail() {
+		return jobLogTail;
+	}
+
+	/**
+	 * @param jobLogTail
+	 *            the jobLogTail to set
+	 */
+	public void setJobLogTail(List<String> jobLogTail) {
+		this.jobLogTail = jobLogTail;
+	}
+
+	/**
+	 * @return the uriTotalsReport
+	 */
+	public Map<String, Long> getUriTotalsReport() {
+		return uriTotalsReport;
+	}
+
+	/**
+	 * @param uriTotalsReport
+	 *            the uriTotalsReport to set
+	 */
+	public void setUriTotalsReport(Map<String, Long> uriTotalsReport) {
+		this.uriTotalsReport = uriTotalsReport;
+	}
+
+	/**
+	 * @return the sizeTotalsReport
+	 */
+	public Map<String, Long> getSizeTotalsReport() {
+		return sizeTotalsReport;
+	}
+
+	/**
+	 * @param sizeTotalsReport
+	 *            the sizeTotalsReport to set
+	 */
+	public void setSizeTotalsReport(Map<String, Long> sizeTotalsReport) {
+		this.sizeTotalsReport = sizeTotalsReport;
+	}
+
+	/**
+	 * @return the rateReport
+	 */
+	public Map<String, Number> getRateReport() {
+		return rateReport;
+	}
+
+	/**
+	 * @param rateReport
+	 *            the rateReport to set
+	 */
+	public void setRateReport(Map<String, Number> rateReport) {
+		this.rateReport = rateReport;
+	}
+
+	/**
+	 * @return the loadReport
+	 */
+	public Map<String, Number> getLoadReport() {
+		return loadReport;
+	}
+
+	/**
+	 * @param loadReport
+	 *            the loadReport to set
+	 */
+	public void setLoadReport(Map<String, Number> loadReport) {
+		this.loadReport = loadReport;
+	}
+
+	/**
+	 * @return the elapsedReport
+	 */
+	public Map<String, Object> getElapsedReport() {
+		return elapsedReport;
+	}
+
+	/**
+	 * @param elapsedReport
+	 *            the elapsedReport to set
+	 */
+	public void setElapsedReport(Map<String, Object> elapsedReport) {
+		this.elapsedReport = elapsedReport;
+	}
+
+	/**
+	 * @return the threadReport
+	 */
+	public Map<String, Object> getThreadReport() {
+		return threadReport;
+	}
+
+	/**
+	 * @param threadReport
+	 *            the threadReport to set
+	 */
+	public void setThreadReport(Map<String, Object> threadReport) {
+		this.threadReport = threadReport;
+	}
+
+	/**
+	 * @return the frontierReport
+	 */
+	public Map<String, Object> getFrontierReport() {
+		return frontierReport;
+	}
+
+	/**
+	 * @param frontierReport
+	 *            the frontierReport to set
+	 */
+	public void setFrontierReport(Map<String, Object> frontierReport) {
+		this.frontierReport = frontierReport;
+	}
+
+	/**
+	 * @return the heapReport
+	 */
+	public Map<String, Object> getHeapReport() {
+		return heapReport;
+	}
+
+	/**
+	 * @param heapReport
+	 *            the heapReport to set
+	 */
+	public void setHeapReport(Map<String, Object> heapReport) {
+		this.heapReport = heapReport;
+	}
+
+	/**
+	 * @return the crawlLogTail
+	 */
+	public List<String> getCrawlLogTail() {
+		return crawlLogTail;
+	}
+
+	/**
+	 * @param crawlLogTail
+	 *            the crawlLogTail to set
+	 */
+	public void setCrawlLogTail(List<String> crawlLogTail) {
+		this.crawlLogTail = crawlLogTail;
+	}
+
+	/**
+	 * @param configFiles
+	 *            the configFiles to set
+	 */
+	public void setConfigFiles(List<Map<String, String>> configFiles) {
+		this.configFiles = configFiles;
+	}
+
+	/**
+	 * @return the configFiles
+	 */
+	public List<Map<String, String>> getConfigFiles() {
+		return configFiles;
+	}
+
+	/**
+	 * @param statusDescription the statusDescription to set
+	 */
+	public void setStatusDescription(String statusDescription) {
+		this.statusDescription = statusDescription;
+	}
+
+	/**
+	 * @return the statusDescription
+	 */
+	public String getStatusDescription() {
+		return statusDescription;
+	}
+
+	/**
+	 * @param availableActions the availableActions to set
+	 */
+	public void setAvailableActions(List<String> availableActions) {
+		this.availableActions = availableActions;
+	}
+
+	/**
+	 * @return the availableActions
+	 */
+	public List<String> getAvailableActions() {
+		return availableActions;
 	}
 
 }

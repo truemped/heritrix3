@@ -41,11 +41,6 @@ public class EngineResourceImpl extends BaseResource implements EngineResource {
 	 */
 	public EngineInfo retrieveEngineInfo() {
 
-		String baseRef = getRequest().getResourceRef().getBaseRef().toString();
-		if (!baseRef.endsWith("/")) {
-			baseRef += "/";
-		}
-
 		final EngineInfo info = new EngineInfo();
 		final Engine engine = getEngine();
 
@@ -53,7 +48,7 @@ public class EngineResourceImpl extends BaseResource implements EngineResource {
 
 		File jobsDir = FileUtils.tryToCanonicalize(engine.getJobsDir());
 		info.setJobsDir(jobsDir.getAbsolutePath());
-		info.setJobsUrl(baseRef + "jobsdir/");
+		info.setJobsUrl(getBaseUrl() + "jobsdir/");
 
 		info.setHeapReport(engine.heapReportData());
 		info.setAvailableActions(getActions());

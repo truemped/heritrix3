@@ -29,8 +29,18 @@ public class BaseResource extends ServerResource {
 	/**
 	 * @return The engine.
 	 */
-	public Engine getEngine() {
+	protected Engine getEngine() {
 		return ((EngineApplication) getApplication()).getEngine();
 	}
 
+	/**
+	 * @return The base URL.
+	 */
+	protected String getBaseUrl() {
+		String baseRef = getRequest().getResourceRef().getBaseRef().toString();
+		if (!baseRef.endsWith("/")) {
+			baseRef += "/";
+		}
+		return baseRef;
+	}
 }
