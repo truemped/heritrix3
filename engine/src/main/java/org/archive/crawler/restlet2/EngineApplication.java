@@ -21,6 +21,7 @@ import org.archive.crawler.restlet2.impl.EngineResourceImpl;
 import org.archive.crawler.restlet2.impl.JobResourceImpl;
 import org.restlet.Application;
 import org.restlet.Restlet;
+import org.restlet.resource.Directory;
 import org.restlet.routing.Redirector;
 import org.restlet.routing.Router;
 
@@ -58,13 +59,15 @@ public class EngineApplication extends Application {
 	public synchronized Restlet createInboundRoot() {
 
 		Router router = new Router(getContext());
-		router.attach("/", new Redirector(null, "/engine",
-				Redirector.MODE_CLIENT_PERMANENT));
+
 		router.attach("/engine", new Redirector(null, "/engine/",
 				Redirector.MODE_CLIENT_PERMANENT));
 
 		router.attach("/engine/", EngineResourceImpl.class);
 		router.attach("/engine/job/{job}", JobResourceImpl.class);
+
+		router.attach("/", new Directory(getContext(),
+				"clap://class/org/archive/crawler/restlet2"));
 
 		return router;
 	}
