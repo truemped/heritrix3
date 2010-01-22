@@ -24,17 +24,20 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.handler.DefaultHandler;
-import org.mortbay.jetty.handler.HandlerList;
-import org.mortbay.jetty.handler.ResourceHandler;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
-import org.mortbay.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.http.security.Constraint;
+import org.eclipse.jetty.http.security.Credential;
+import org.eclipse.jetty.http.security.Password;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.SecurityHandler;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.bio.SocketConnector;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.ServletHandler;
 
 /**
  * Test HTTP basic authentication
@@ -74,13 +77,12 @@ public class HttpAuthSelfTest
         cm.setConstraint(constraint);
         cm.setPathSpec("/basic/*");
         
-        HashUserRealm realm = new HashUserRealm();
-        realm.setName("Hyrule");
-        realm.put("Mr. Happy Pants", "xyzzy");
-        realm.addUserToRole("Mr. Happy Pants", "user");
+        HashLoginService service = new HashLoginService();
+        service.setName("Hyrule");
+        service.putUser("Mr. Happy Pants", new Password("xyzzy"), new String[] {"user"});
         
-        SecurityHandler securityHandler = new SecurityHandler();
-        securityHandler.setUserRealm(realm);
+        ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
+        securityHandler.setLoginService(service);
         securityHandler.setConstraintMappings(new ConstraintMapping[]{cm});
         
         SocketConnector sc = new SocketConnector();
