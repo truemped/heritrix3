@@ -47,6 +47,7 @@ import org.archive.spring.ConfigPath;
 import org.archive.util.ArchiveUtils;
 import org.archive.util.FileUtils;
 import org.archive.util.TextUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.Context;
 import org.restlet.data.CharacterSet;
 import org.restlet.data.Form;
@@ -80,6 +81,7 @@ public class JobResource extends BaseResource {
         setModifiable(true);
         getVariants().add(new Variant(MediaType.TEXT_HTML));
         getVariants().add(new Variant(MediaType.APPLICATION_XML));
+        getVariants().add(new Variant(MediaType.APPLICATION_JSON));
         cj = getEngine().getJob(TextUtils.urlUnescape((String)req.getAttributes().get("job")));
     }
 
@@ -95,6 +97,14 @@ public class JobResource extends BaseResource {
                     XmlMarshaller.marshalDocument(writer, "job", makePresentableMap());
                     }
             };
+        } else if(variant.getMediaType() == MediaType.APPLICATION_JSON) {
+        	representation = new WriterRepresentation(MediaType.APPLICATION_JSON) {
+				@Override
+				public void write(Writer writer) throws IOException {
+					ObjectMapper mapper = new ObjectMapper();
+					mapper.writeValue(writer, makePresentableMap());
+				}
+			};
         } else {
             representation = new WriterRepresentation(MediaType.TEXT_HTML) {
             public void write(Writer writer) throws IOException {

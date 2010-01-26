@@ -37,6 +37,7 @@ import javax.script.ScriptException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.archive.util.TextUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.Context;
 import org.restlet.data.CharacterSet;
 import org.restlet.data.Form;
@@ -78,6 +79,7 @@ public class ScriptResource extends JobRelatedResource {
         setModifiable(true);
         getVariants().add(new Variant(MediaType.TEXT_HTML));
         getVariants().add(new Variant(MediaType.APPLICATION_XML));
+        getVariants().add(new Variant(MediaType.APPLICATION_JSON));
     }
     
     @Override
@@ -126,6 +128,14 @@ public class ScriptResource extends JobRelatedResource {
                     XmlMarshaller.marshalDocument(writer,"script", makePresentableMap());
                 }
             };
+        } else if(variant.getMediaType() == MediaType.APPLICATION_JSON) {
+        	representation = new WriterRepresentation(MediaType.APPLICATION_JSON) {
+				@Override
+				public void write(Writer writer) throws IOException {
+					ObjectMapper mapper = new ObjectMapper();
+					mapper.writeValue(writer, makePresentableMap());
+				}
+			};
         } else {
             representation = new WriterRepresentation(MediaType.TEXT_HTML) {
                 public void write(Writer writer) throws IOException {

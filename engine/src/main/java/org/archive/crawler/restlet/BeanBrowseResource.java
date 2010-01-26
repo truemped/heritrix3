@@ -33,6 +33,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.archive.spring.PathSharingContext;
 import org.archive.util.TextUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.Context;
 import org.restlet.data.CharacterSet;
 import org.restlet.data.Form;
@@ -62,6 +63,7 @@ public class BeanBrowseResource extends JobRelatedResource {
         super(ctx, req, res);
         getVariants().add(new Variant(MediaType.TEXT_HTML));
         getVariants().add(new Variant(MediaType.APPLICATION_XML));
+        getVariants().add(new Variant(MediaType.APPLICATION_JSON));
         setModifiable(true); // accept POSTs
         appCtx = cj.getJobContext();
         beanPath = (String)req.getAttributes().get("beanPath");
@@ -126,6 +128,14 @@ public class BeanBrowseResource extends JobRelatedResource {
                     XmlMarshaller.marshalDocument(writer, "script", makePresentableMap());
                 }
             };
+        } else if(variant.getMediaType() == MediaType.APPLICATION_JSON) {
+        	representation = new WriterRepresentation(MediaType.APPLICATION_JSON) {
+				@Override
+				public void write(Writer writer) throws IOException {
+					ObjectMapper mapper = new ObjectMapper();
+					mapper.writeValue(writer, makePresentableMap());
+				}
+			};
         } else {
             representation = new WriterRepresentation(
                     MediaType.TEXT_HTML) {
