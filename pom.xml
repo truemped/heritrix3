@@ -102,14 +102,14 @@ Heritrix is the Internet Archive's open-source, extensible, web-scale,
     </pluginRepository>
     </pluginRepositories>
 
-    <scm>
+    <!--scm>
        <connection>
        scm:svn:https://archive-crawler.svn.sourceforge.net/svnroot/archive-crawler/trunk/heritrix3
        </connection>
        <url>
        https://archive-crawler.svn.sourceforge.net/svnroot/archive-crawler/trunk/heritrix3
        </url>
-    </scm>
+    </scm-->
 
     <prerequisites>
         <maven>2.0.9</maven>
