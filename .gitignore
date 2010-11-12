@@ -1,0 +1,40 @@
+
+.settings
+
+# /
+/target
+/paths.properties
+/bin
+/arcs
+/logs
+/scratch
+/state
+/adhoc.keystore
+/jobs
+/libsrc
+
+# /commons/
+/commons/target
+
+# /dist/
+/dist/target
+
+# /engine/
+/engine/disk
+/engine/jobs
+/engine/target
+/engine/.checkstyle
+/engine/heritrix_dmesg.log
+/engine/heritrix_out.log
+/engine/profiles
+/engine/jsp-compiled
+/engine/doc
+/engine/heapdump.*
+/engine/javacore.*
+/engine/hs_err_pid*
+/engine/libsrc
+/engine/arcs
+/engine/adhoc.keystore
+
+# /modules/
+/modules/target
